@@ -14,6 +14,14 @@ class MainHandler(webapp2.RequestHandler):
 class NewVideoHandler(webapp2.RequestHandler):
     def post(self):
 
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template("templates/about.html")
+        self.response.write(template.render())
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/about', AboutHandler)
+
 ], debug=True)
