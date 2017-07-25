@@ -1,5 +1,5 @@
 body {
-   background-color: #FB4747;
+   background-color: #FFC300;
    font-family:'Lato', sans-serif;
    font-size: 35px;
    font-weight: 10;
@@ -52,22 +52,24 @@ button {
     -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
     animation-name: example;
     animation-duration: 10s;
+    margin-left: 150px;
 }
 
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes example {
-    from {background-color: black;}
-    to {background-color: white;}
-}
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes example {
+      from {background-color: #FF5733;}
+      to {background-color: #C70039;}
+  }
 
-/* Standard syntax */
-@keyframes example {
-    from {background-color: black;}
-    to {background-color: #FB4747;}
-}
+  /* Standard syntax */
+  @keyframes example {
+      from {background-color: #FF5733;}
+      to {background-color: #C70039;}
+  }
 
 
 form {
   display: flex;
+  margin-left: 150px;
 
 }
