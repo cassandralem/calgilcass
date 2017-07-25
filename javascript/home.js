@@ -39,13 +39,6 @@ var tag = document.createElement('script');
        player2.stopVideo();
    }
 
-   // menu js
-   $(document).ready(function(){
-	$('#nav-icon1').click(function(){
-		$(this).toggleClass('open');
-	});
-});
-
 function clickLike() {
   // Here, "this" is the button that the user clicked.
   var button = $(this);
@@ -76,64 +69,10 @@ $("form").submit(function(e){
 });
 
 $('.video-container button').click(clickLike);
-<<<<<<< HEAD
 
+// menu section allows for section navigation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   var menu = document.querySelector('.nav__list');
+var menu = document.querySelector('.nav__list');
 var burger = document.querySelector('.burger');
 var doc = $(document);
 var l = $('.scrolly');
