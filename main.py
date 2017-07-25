@@ -14,6 +14,15 @@ class UploadedVideo(ndb.Model):
     post_time = ndb.DateTimeProperty(auto_now_add=True)
     like_count = ndb.IntegerProperty(default = 0)
 
+def add_default_videos():
+    cat = Photo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
+    llama = Photo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0)
+
+    cat.put()
+    llama.put()
+
+    return [llama, cat]
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("templates/home.html")
@@ -26,11 +35,11 @@ class MainHandler(webapp2.RequestHandler):
 
         self.response.write(template.render(template_vars))
 
-    def post(self):
-        video_query = UploadedVideo.query().order(UploadedVideo.post_time)
-        videos = video_query.fetch()
+    #def post(self):
+        #video_query = UploadedVideo.query().order(UploadedVideo.post_time)
+        #videos = video_query.fetch()
 
-        self.redirect('/')
+        #self.redirect('/')
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
@@ -55,7 +64,7 @@ class LikeHandler(webapp2.RequestHandler):
     def post(self):
 
         # === 1: Get info from the request. ===
-        urlsafe_key = self.request.get('video-container_key')
+        urlsafe_key = self.request.get('video_key')
 
         # === 2: Interact with the database. ===
 
