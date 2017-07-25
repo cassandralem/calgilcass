@@ -24,7 +24,7 @@
           <span id="player1"></span>
           <button name="boot1">Boot 1</button>
           <div class="like-container">
-            <button value="{{ videos[0].key.urlsafe() }}">Like</button>
+            <button name="like1" value="{{ videos[0].key.urlsafe() }}">Like</button>
             <span class="likes">{{ videos[0].like_count }}</span> likes
           </div>
         </div>
@@ -37,7 +37,7 @@
           <span id="player2"></span>
           <button name="boot2"> Boot 2</button>
           <div class="like-container">
-            <button value="{{ videos[1].key.urlsafe() }}">Like</button>
+            <button name="like2" value="{{ videos[1].key.urlsafe() }}">Like</button>
             <span class="likes">{{ videos[1].like_count }}</span> likes
           </div>
         </div>
@@ -46,5 +46,4 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="/javascript/home.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
