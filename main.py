@@ -29,8 +29,11 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         video_query = UploadedVideo.query().order(UploadedVideo.post_time)
         videos = video_query.fetch()
-
-        videos[0].key.delete()
+# this does not work yet, need help with syntax
+        if "boot2" == true:
+            videos[0].key.delete()
+        if "boot1" == true:
+            videos[1].key.delete()
         self.redirect('/')
 
 class AboutHandler(webapp2.RequestHandler):
