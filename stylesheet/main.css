@@ -21,6 +21,11 @@ button {
    margin: 5px;
   }
 
+#player1, #player2 {
+  pointer-events:none
+}
+
+
   button span {
    cursor: pointer;
    display: inline-block;

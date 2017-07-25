@@ -12,32 +12,21 @@ var tag = document.createElement('script');
          height: '500',
          width: '500',
          videoId: 'gtoknSe54gs',
-         playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb':1, 'modestbranding':1, 'rel':0 },
-         events: {
-               'onReady': onPlayerReady
-           }
+         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
+
        });
 
        player2 = new YT.Player('player2', {
          height: '500',
          width: '500',
          videoId: 'fcsDG_jVYbc',
-         playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb':1 },
-         events: {
-               'onReady': stopVideo
-           }
+         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
+
        });
    }
 
 
-   function onPlayerReady(event) {
-       event.target.playVideo();
-   }
 
-   function stopVideo() {
-       player1.stopVideo();
-       player2.stopVideo();
-   }
 
 function clickLike() {
   // Here, "this" is the button that the user clicked.
