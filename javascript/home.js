@@ -38,3 +38,11 @@ var tag = document.createElement('script');
        player1.stopVideo();
        player2.stopVideo();
    }
+
+   // menu js
+
+   $(document).ready(function(){
+	$('#nav-icon1').click(function(){
+		$(this).toggleClass('open');
+	});
+});
