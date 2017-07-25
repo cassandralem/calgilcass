@@ -50,7 +50,6 @@ function clickLike() {
     $(likes).text(response);
 
   });
-  alert('working');
 }
 
 $("form").submit(function(e){
