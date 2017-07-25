@@ -12,7 +12,7 @@ var tag = document.createElement('script');
          height: '500',
          width: '500',
          videoId: 'yHboxvCGwyI',
-         playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb':1 },
+         playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb':1, 'modestbranding':1, 'rel':0 },
          events: {
                'onReady': onPlayerReady
            }
@@ -35,5 +35,6 @@ var tag = document.createElement('script');
    }
 
    function stopVideo() {
-       player.stopVideo();
+       player1.stopVideo();
+       player2.stopVideo();
    }
