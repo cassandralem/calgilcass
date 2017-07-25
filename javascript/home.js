@@ -56,7 +56,7 @@ function clickLike() {
   var urlsafeKey = $(button).val();
 
   // Send a POST request and handle the response.
-  $.post('/likes', {'videos[0].video_id': urlsafeKey}, function(response) {
+  $.post('/likes', {'video_key': urlsafeKey}, function(response) {
     // Update the number in the "like" element.
     $(likes).text(response);
 

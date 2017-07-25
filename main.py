@@ -64,7 +64,7 @@ class LikeHandler(webapp2.RequestHandler):
     def post(self):
 
         # === 1: Get info from the request. ===
-        urlsafe_key = self.request.get('video-container_key')
+        urlsafe_key = self.request.get('video_key')
 
         # === 2: Interact with the database. ===
 
