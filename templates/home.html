@@ -24,7 +24,7 @@
           height: '390',
           width: '640',
           //videoId: 'M7lc1UVf-VE',
-          videoId: 'bW8gbsedzpw',
+          videoId: '{{ videos[0].video_id }}',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -51,6 +51,10 @@
         player.stopVideo();
       }
     </script>
+
+    <form action="/" method="post">
+        <button>Next Video</button>
+    </form>
 
 
   </body>
