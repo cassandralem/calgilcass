@@ -1,4 +1,4 @@
-
+import logging
 import webapp2
 import os
 import jinja2
@@ -12,7 +12,7 @@ class UploadedVideo(ndb.Model):
     user_name = ndb.StringProperty()
     video_id = ndb.StringProperty()
     post_time = ndb.DateTimeProperty(auto_now_add=True)
-
+    like_count = ndb.IntegerProperty(default = 0)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -45,14 +45,39 @@ class NewVideoHandler(webapp2.RequestHandler):
         user_name = self.request.get('user_name')
         video_id = self.request.get('video_id')
 
-        new_video = UploadedVideo(user_name=user_name, video_id=video_id)
+        new_video = UploadedVideo(user_name=user_name, video_id=video_id, like_count = 0)
         new_video.put()
 
         self.redirect('/newvideo')
 
+class LikeHandler(webapp2.RequestHandler):
+    # Handles increasing the likes when you click the button.
+    def post(self):
+
+        # === 1: Get info from the request. ===
+        urlsafe_key = self.request.get('video-container_key')
+
+        # === 2: Interact with the database. ===
+
+        # Use the URLsafe key to get the video from the DB.
+        video_key = ndb.Key(urlsafe=urlsafe_key)
+        video = video_key.get()
+
+        # Fix the photo like count just in case it is None.
+        if video.like_count == None:
+            video.like_count = 0
+
+        # Increase the photo count and update the database.
+        video.like_count = video.like_count + 1
+        video.put()
+
+        # === 3: Send a response. ===
+        # Send the updated count back to the client.
+        self.response.write(video.like_count)
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/about', AboutHandler),
-    ('/newvideo', NewVideoHandler)
-
+    ('/newvideo', NewVideoHandler),
+    ('/likes', LikeHandler)
 ], debug=True)

@@ -40,7 +40,43 @@ var tag = document.createElement('script');
    }
 
    // menu js
+   $(document).ready(function(){
+	$('#nav-icon1').click(function(){
+		$(this).toggleClass('open');
+	});
+});
 
+function clickLike() {
+  // Here, "this" is the button that the user clicked.
+  var button = $(this);
+
+  // Move through the DOM tree to find the "likes"
+  // element that corresponds to the clicked button.
+
+  // Look through parents of this to find .photo.
+  var video = $(this).parents('.video-container');
+
+  // Look inside photo to find .likes.
+  var likes = $(video).find('.likes');
+
+  // Get the URLsafe key from the button value.
+  var urlsafeKey = $(button).val();
+
+  // Send a POST request and handle the response.
+  $.post('/likes', {'videos[0].video_id': urlsafeKey}, function(response) {
+    // Update the number in the "like" element.
+    $(likes).text(response);
+
+  });
+  alert('working');
+}
+
+$("form").submit(function(e){
+    e.preventDefault();
+});
+
+$('.video-container button').click(clickLike);
+<<<<<<< HEAD
 
 
 
