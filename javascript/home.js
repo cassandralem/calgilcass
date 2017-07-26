@@ -8,6 +8,9 @@ var tag = document.createElement('script');
    var player2;
 
    function onYouTubeIframeAPIReady() {
+       var player1El = $('#player1');
+       var videoUrl = player1El.attr('value');
+       console.log('VIDEO1 = ' + videoUrl);
        player1 = new YT.Player('player1', {
          height: '500',
          width: '500',
@@ -25,7 +28,22 @@ var tag = document.createElement('script');
        });
    }
 
+/*
+1 minute is up
+decide if player1 or player2 win
 
+loser = player2
+new_url = response.newVideo
+new YT.Player(loser, {
+  height: '500',
+  width: '500',
+  videoId: new_url,
+  playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
+
+});
+
+
+*/
 
 
 function clickLike() {
@@ -59,6 +77,15 @@ $("form").submit(function(e){
 $('.video-container button').click(clickLike);
 
 // menu section allows for section navigation
+
+///Starting to linking database with videokeys in players
+
+
+
+
+
+
+
 
 var menu = document.querySelector('.nav__list');
 var burger = document.querySelector('.burger');

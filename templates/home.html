@@ -39,7 +39,7 @@
       <form action="/" method="post">
           <div class="video-container">
             <h3>Video 1</h3>
-            <span id="player1"></span>
+            <span id="player1" value="{{ videos[0].key.urlsafe() }}"></span>
             <div class="like-container">
               <button name="like1" value="{{ videos[0].key.urlsafe() }}">Like</button>
               <span class="likes">{{ videos[0].like_count }}</span> likes
@@ -51,7 +51,7 @@
             <br>
             <div class="video-container">
             <h3>Video 2</h3>
-            <span id="player2"></span>
+            <span id="player2" value="{{ videos[1].key.urlsafe() }}"></span>
             <div class="like-container">
               <button name="like2" value="{{ videos[1].key.urlsafe() }}">Like</button>
               <span class="likes">{{ videos[1].like_count }}</span> likes
