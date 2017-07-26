@@ -19,7 +19,7 @@ var tag = document.createElement('script');
        player1 = new YT.Player('player1', {
          height: '500',
          width: '500',
-         videoId: ,
+         videoId: 'vQdG3ks8-qY' ,
          playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
 
        });
@@ -32,7 +32,7 @@ var tag = document.createElement('script');
 
        });
    };
-$('#test').click(onYouTubeIframeAPIReady);
+
 
 
 //setInterval(function(onYouTubeIframeAPIReady){console.log("Hello")},10000);
