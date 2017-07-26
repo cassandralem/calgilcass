@@ -6,20 +6,31 @@ var tag = document.createElement('script');
 
    var player1;
    var player2;
+   var player1_url = "boot"
+   var player2_url = ""
 
-   function onYouTubeIframeAPIReady() {
-       var player1El = $('#player1');
-       var videoUrl = player1El.attr('value');
-       console.log('VIDEO1 = ' + videoUrl);
-       $.post('/getdeletevideo', function(response) {
-         // Update the number in the "like" element.
-         $(player1).text(response);
-       });
 
+   function get_and_delete(){
+    //  var player1El = $('#player1');
+    //  var videoUrl = player1El.attr('value');
+    //  console.log('VIDEO1 = ' + videoUrl);
+     $.post('/getdeletevideo', function(response) {
+       $(player1).get(response);
+       player1_url = response
+       alert(player1_url);
+       onYouTubeIframeAPIReady(player1_url)
+     });
+
+   }
+
+   $('#test').click(get_and_delete);
+
+   function onYouTubeIframeAPIReady(player1_url) {
+      console.log(player1_url)
        player1 = new YT.Player('player1', {
          height: '500',
          width: '500',
-         videoId: 'vQdG3ks8-qY' ,
+         videoId: player1_url,
          playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
 
        });
@@ -32,7 +43,6 @@ var tag = document.createElement('script');
 
        });
    };
-
 
 
 //setInterval(function(onYouTubeIframeAPIReady){console.log("Hello")},10000);

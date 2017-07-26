@@ -89,7 +89,6 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
     def post(self):
         video_query = UploadedVideo.query().filter(UploadedVideo.played==False).order(UploadedVideo.post_time)
         video = video_query.get()
-
         video.played = True
         video.put()
         self.response.write(video.video_id)
