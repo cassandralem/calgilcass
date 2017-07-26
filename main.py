@@ -84,9 +84,16 @@ class LikeHandler(webapp2.RequestHandler):
         # Send the updated count back to the client.
         self.response.write(video.like_count)
 
+class GetAndDeleteVideoHandler(webapp2.RequestHandler):
+    def post(self):
+        urlsafe_key = self.request.get('videoUrl')
+        videoUrl = ndb.Key(urlsafe = urlsafe_key)
+        video_id = videoUrl.get()
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/about', AboutHandler),
     ('/newvideo', NewVideoHandler),
-    ('/likes', LikeHandler)
+    ('/likes', LikeHandler),
+    ('/getdeletevideo', GetAndDeleteVideoHandler)
 ], debug=True)
