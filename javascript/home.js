@@ -18,22 +18,27 @@ var tag = document.createElement('script');
        $(player1).get(response);
        player1_url = response
        alert(player1_url);
-       onYouTubeIframeAPIReady(player1_url)
-     });
+     $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url)
+
+       // TODO: Use jQuery to select the correct iframe
+       // TODO: Update the src attribute of the iframe with the video id, also set autoplay=1
+
+      // onYouTubeIframeAPIReady(player1_url)
+    });
 
    }
 
    $('#test').click(get_and_delete);
 
    function onYouTubeIframeAPIReady(player1_url) {
-      console.log(player1_url)
-       player1 = new YT.Player('player1', {
-         height: '500',
-         width: '500',
-         videoId: player1_url,
-         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
-
-       });
+      // console.log(player1_url)
+      //  player1 = new YT.Player('player1', {
+      //    height: '500',
+      //    width: '500',
+      //    videoId: player1_url,
+      //    playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
+      //
+      //  });
 
        player2 = new YT.Player('player2', {
          height: '500',
