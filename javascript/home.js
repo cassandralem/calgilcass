@@ -11,6 +11,12 @@ var tag = document.createElement('script');
        var player1El = $('#player1');
        var videoUrl = player1El.attr('value');
        console.log('VIDEO1 = ' + videoUrl);
+       $.post('/getdeletevideo', {'videoUrl': urlsafeKey}, function(response) {
+         // Update the number in the "like" element.
+         $(player1).text(response);
+
+       }
+
        player1 = new YT.Player('player1', {
          height: '500',
          width: '500',
@@ -28,6 +34,7 @@ var tag = document.createElement('script');
        });
    }
 
+setInterval(function(onYouTubeIframeAPIReady()){alert("Hello")},3000);
 /*
 1 minute is up
 decide if player1 or player2 win
