@@ -6,7 +6,7 @@ var tag = document.createElement('script');
 
    var player1;
    var player2;
-   var player1_url = "boot"
+   var player1_url = ""
    var player2_url = ""
 
 
@@ -17,7 +17,10 @@ var tag = document.createElement('script');
      $.post('/getdeletevideo', function(response) {
        $(player1).get(response);
        player1_url = response
-       alert(player1_url);
+
+       
+
+
      $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url)
 
        // TODO: Use jQuery to select the correct iframe
@@ -30,7 +33,7 @@ var tag = document.createElement('script');
 
    $('#test').click(get_and_delete);
 
-   function onYouTubeIframeAPIReady(player1_url) {
+   //function onYouTubeIframeAPIReady(player1_url) {
       // console.log(player1_url)
       //  player1 = new YT.Player('player1', {
       //    height: '500',
@@ -40,14 +43,14 @@ var tag = document.createElement('script');
       //
       //  });
 
-       player2 = new YT.Player('player2', {
-         height: '500',
-         width: '500',
-         videoId: 'vQdG3ks8-qY',
-         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
-
-       });
-   };
+  //      player2 = new YT.Player('player2', {
+  //        height: '500',
+  //        width: '500',
+  //        videoId: 'vQdG3ks8-qY',
+  //        playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
+   //
+  //      });
+  //  };
 
 
 //setInterval(function(onYouTubeIframeAPIReady){console.log("Hello")},10000);

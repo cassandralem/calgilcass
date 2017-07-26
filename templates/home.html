@@ -54,7 +54,7 @@
             <br>
             <div class="video-container">
             <h3>Video 2</h3>
-            <span id="player2" value="{{ videos[1].key.urlsafe() }}"></span>
+            <iframe id="player2_iframe" width="500" height="500" frameborder="0" allowfullscreen></iframe>
             <div class="like-container">
               <button name="like2" value="{{ videos[1].key.urlsafe() }}">Like</button>
               <span class="likes">{{ videos[1].like_count }}</span> likes
