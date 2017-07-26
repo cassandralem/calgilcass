@@ -13,10 +13,11 @@ class UploadedVideo(ndb.Model):
     video_id = ndb.StringProperty()
     post_time = ndb.DateTimeProperty(auto_now_add=True)
     like_count = ndb.IntegerProperty(default = 0)
+    played = ndb.BooleanProperty(default = False)
 
 def add_default_videos():
-    cat = Photo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
-    llama = Photo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0)
+    cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
+    llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0)
 
     cat.put()
     llama.put()
@@ -86,9 +87,25 @@ class LikeHandler(webapp2.RequestHandler):
 
 class GetAndDeleteVideoHandler(webapp2.RequestHandler):
     def post(self):
-        urlsafe_key = self.request.get('videoUrl')
-        videoUrl = ndb.Key(urlsafe = urlsafe_key)
-        video_id = videoUrl.get()
+        video_query = UploadedVideo.query().filter(UploadedVideo.played==False).order(UploadedVideo.post_time)
+        video = video_query.get()
+
+        video.played = True
+        video.put()
+        self.response.write(video.video_id)
+
+
+        #if videos == None:
+            #add_default_videos()
+        # for video in videos:
+        #     if video.played == False:
+        #         self.response.write(video.video_id)
+        #         video.played = True
+        #         break
+        #     elif video.played == True:
+        #         video.key.delete
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
