@@ -86,6 +86,7 @@ ul {
   cursor: pointer;
   transition: $ease;
 
+
   &:hover {
     background: mix(black, $nav-bg, 10);
   }
