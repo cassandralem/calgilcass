@@ -41,7 +41,7 @@
             <h3>Video 1</h3>
             <!-- <span id="player1" value="{{ videos[0].key.urlsafe() }}"></span> -->
             <!-- TODO: Instead of having spans, have iframes that start off without a src -->
-            <iframe id="player1_iframe" width="500" height="500" frameborder="0" allowfullscreen></iframe>
+            <iframe id="player1_iframe" width="500" height="500" frameborder="0" allowfullscreen controls=0 autoplay ></iframe>
 
             <div class="like-container">
               <button id="like1" name="like1">Like</button>
@@ -54,7 +54,7 @@
             <br>
             <div id="video-container2" class="video-container">
             <h3>Video 2</h3>
-            <iframe id="player2_iframe" width="500" height="500" frameborder="0" allowfullscreen></iframe>
+            <iframe id="player2_iframe" width="500" height="500" frameborder="0" allowfullscreen controls=0></iframe>
             <div class="like-container">
               <button id="like2" name="like2">Like</button>
               <span class="likes">{{ videos[1].like_count }}</span> likes
@@ -74,7 +74,11 @@
     <div class="panel__content">
       <h1 class="panel__headline">&nbsp;How it works<i class="fa fa-question" aria-hidden="true"></i></h1>
       <div class="panel__block"></div>
-      <p>We will explain the rules and stuff here.</p>
+      <p>Boot is an interactive competition game where two users have two minutes to livestream entertaining content. Other users will watch in real time and like either video based on which one is more entertaining. After two minutes, the user whose video has the least likes will lose and be "booted". A new video from the queue will replace the "booted" video, and the competition will begin again!
+      <hr>
+      </p>
+      <br>
+      <button type="button"><a href="http://boot-cssi-2017.appspot.com/newvideo">Join the competition!</a></button>
     </div>
   </article>
 </section>
@@ -83,7 +87,7 @@
     <div class="panel__content">
       <h1 class="panel__headline"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Join Next</h1>
       <div class="panel__block"></div>
-      <p>Here a user will use their url to queue next to be next.</p>
+      <p>Click the link below to queue your live video.</p>
 
       <table style="width:100%">
         <tr>

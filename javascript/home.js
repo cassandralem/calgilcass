@@ -40,7 +40,7 @@ var tag = document.createElement('script');
      })
 
         if (like1 < like2) {
-         $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url)
+         $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
      // TODO: Use video key to set the value of the like count
           $('#like1').attr("value", player_key)
           $('#like2').attr("value", 0)
@@ -48,7 +48,7 @@ var tag = document.createElement('script');
         }
 
         if (like2 < like1) {
-          $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url)
+          $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
       // TODO: Use video key to set the value of the like count
            $('#like2').attr("value", player_key)
            $('#like1').attr("value", 0)
@@ -61,8 +61,6 @@ var tag = document.createElement('script');
 
       // onYouTubeIframeAPIReady(player1_url)
     };
-
-
 
    $('#test').click(get_and_delete);
 
