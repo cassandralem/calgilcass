@@ -94,11 +94,10 @@
           <th>Place in line</th>
           <th>Username</th>
         </tr>
-        {% for video in videos %}
-
-          <tr>
-            <td>{{video.user_name}}</td>
-          </tr>
+        {% for video in unplayedVideos %}
+            <tr>
+              <td>{{video.user_name}}</td>
+            </tr>
         {% endfor %}
       </table>
     </div>
