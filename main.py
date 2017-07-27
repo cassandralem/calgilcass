@@ -31,9 +31,12 @@ class MainHandler(webapp2.RequestHandler):
         video_query = UploadedVideo.query().order(UploadedVideo.post_time)
         videos = video_query.fetch()
 
+        video_query = UploadedVideo.query().order(UploadedVideo.post_time).filter(UploadedVideo.played==False)
+        unplayedVideos = video_query.fetch()
 
         template_vars = {
-        "videos": videos
+        "videos": videos,
+        "unplayedVideos": unplayedVideos
         }
 
         self.response.write(template.render(template_vars))
