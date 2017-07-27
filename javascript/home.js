@@ -14,30 +14,53 @@ var tag = document.createElement('script');
     //  var player1El = $('#player1');
     //  var videoUrl = player1El.attr('value');
     //  console.log('VIDEO1 = ' + videoUrl);
+      var like1 = $('#video-container1').find('.likes');
+      like1 = parseInt(like1.text());
+
+      var like2 = $('#video-container2').find('.likes');
+      like2 = parseInt(like2.text());
+
+
+
+
+      // var like2 = $('#like2')
+      //
+      // if like1 > like2 {
+      //   console.log(like1)
+      // }
+
      $.post('/getdeletevideo', function(response_string) {
        // TODO: Parse the JSON string into an object, that has the video's id and u
        video_vars = JSON.parse(response_string)
        console.log(video_vars)
-       $(player1).get();
-       player1_url = video_vars.videoId
-       player1_key = video_vars.videoUrlSafeKey
-       console.log(player1_url)
+      //  $(player1).get();
+       player_url = video_vars.videoId
+       player_key = video_vars.videoUrlSafeKey
+       console.log(player_url)
+     })
 
-
-
-
-     $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url + "?autoplay=1&showinfo=0&controls=0")
+        if (like1 < like2) {
+         $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
      // TODO: Use video key to set the value of the like count
-     $('#like1').attr("value", player1_key)
+          $('#like1').attr("value", player_key)
+          $('#like2').attr("value", 0)
+
+        }
+
+        if (like2 < like1) {
+          $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
+      // TODO: Use video key to set the value of the like count
+           $('#like2').attr("value", player_key)
+           $('#like1').attr("value", 0)
+         }
+
+
 
        // TODO: Use jQuery to select the correct iframe
        // TODO: Update the src attribute of the iframe with the video id, also set autoplay=1
 
       // onYouTubeIframeAPIReady(player1_url)
-    });
-
-
-   }
+    };
 
    $('#test').click(get_and_delete);
 
