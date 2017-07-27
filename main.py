@@ -16,6 +16,10 @@ class UploadedVideo(ndb.Model):
     like_count = ndb.IntegerProperty(default = 0)
     played = ndb.BooleanProperty(default = False)
 
+class CurrentVideos(ndb.Model):
+    video_right_key = ndb.KeyProperty()
+    video_left_key = ndb.KeyProperty()
+
 def add_default_videos():
     cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
     llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0)
@@ -94,14 +98,45 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
     def post(self):
         video_query = UploadedVideo.query().filter(UploadedVideo.played==False).order(UploadedVideo.post_time)
         video = video_query.get()
+        current_query = CurrentVideos.query()
+        playing_videos = current_query.get()
+
+        if not playing_videos:
+            playing_videos = CurrentVideos()
+
+        video_right_key = playing_videos.video_right_key
+        video_left_key = playing_videos.video_left_key
+
+        right_video = video_right_key.get()
+        left_video = video_left_key.get()
+#need to change likes
+        if right_video.like_count > left_video.like_count:
+            playing_videos.video_left_key = video.key
+        elif right_video.like_count < left_video.like_count:
+            playing_videos.video_right_key = video.key
+
+        playing_videos.put()
+
+
+
+
+
+
+        # video_query2 = UploadedVideo.query().filter(UploadedVideo.played==True).order(-UploadedVideo.post_time)
+        # lastvid = video_query2.get()
+        #
+        # lastvid.like_count = 0
+
         video.played = True
         video.put()
+        # lastvid.put()
         response_vars = {
             "videoId": video.video_id,
             "videoUrlSafeKey": video.key.urlsafe()
         }
         # TODO: Write a JSON response with the JSONified dictionary of the id and URLSafeKey
         self.response.write(json.dumps(response_vars))
+
 
 
         #if videos == None:
@@ -121,5 +156,6 @@ app = webapp2.WSGIApplication([
     ('/about', AboutHandler),
     ('/newvideo', NewVideoHandler),
     ('/likes', LikeHandler),
-    ('/getdeletevideo', GetAndDeleteVideoHandler)
+    ('/getdeletevideo', GetAndDeleteVideoHandler),
+
 ], debug=True)

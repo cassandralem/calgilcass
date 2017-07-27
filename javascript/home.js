@@ -43,15 +43,16 @@ var tag = document.createElement('script');
          $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
      // TODO: Use video key to set the value of the like count
           $('#like1').attr("value", player_key)
-          $('#like2').attr("value", 0)
+          
+
 
         }
 
-        if (like2 < like1) {
+        else if (like2 < like1 || like2 == like1) {
           $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url + "?autoplay=1&showinfo=0&controls=0")
       // TODO: Use video key to set the value of the like count
            $('#like2').attr("value", player_key)
-           $('#like1').attr("value", 0)
+
          }
 
 
