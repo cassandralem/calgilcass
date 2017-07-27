@@ -36,6 +36,10 @@ button {
    margin: 5px;
   }
 
+div {
+  text-align: center;
+}
+
 button:hover {
   background-color: #FFFFFF;
   color: #FFC300;
@@ -46,7 +50,10 @@ button:hover {
   pointer-events:none
 }
 
-
+a {
+  text-decoration: none;
+  color: white;
+}
 
 
 

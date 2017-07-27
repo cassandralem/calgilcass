@@ -81,22 +81,23 @@
 <section class="panel b-red" id="3">
   <article class="panel__wrapper">
     <div class="panel__content">
-      <h1 class="panel__headline"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Join Next</h1>
+      <h1 class="panel__headline"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Track which videos are coming next</h1>
       <div class="panel__block"></div>
-      <p>Here a user will use their url to queue next to be next.</p>
+      <p>Users are listed in the order in which their videos will appear.</p>
 
       <table style="width:100%">
-        <tr>
-          <th>Place in line</th>
-          <th>Username</th>
-        </tr>
+        <!--<tr>-->
+          <!--<th>Place in line</th>-->
+          <!--<th>Username</th>-->
+        <!--</tr>-->
         {% for video in videos %}
-
           <tr>
             <td>{{video.user_name}}</td>
           </tr>
         {% endfor %}
       </table>
+      <br>
+      <button type="button"><a href="http://boot-cssi-2017.appspot.com/newvideo">Add your video to the queue</a></button>
     </div>
   </article>
 </section>
