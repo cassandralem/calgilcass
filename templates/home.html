@@ -39,9 +39,12 @@
       <form action="/" method="post">
           <div class="video-container">
             <h3>Video 1</h3>
-            <span id="player1"></span>
+            <!-- <span id="player1" value="{{ videos[0].key.urlsafe() }}"></span> -->
+            <!-- TODO: Instead of having spans, have iframes that start off without a src -->
+            <iframe id="player1_iframe" width="500" height="500" frameborder="0" allowfullscreen></iframe>
+
             <div class="like-container">
-              <button name="like1" value="{{ videos[0].key.urlsafe() }}">Like</button>
+              <button id="like1" name="like1">Like</button>
               <span class="likes">{{ videos[0].like_count }}</span> likes
             </div>
           </div>
@@ -51,9 +54,9 @@
             <br>
             <div class="video-container">
             <h3>Video 2</h3>
-            <span id="player2"></span>
+            <iframe id="player2_iframe" width="500" height="500" frameborder="0" allowfullscreen></iframe>
             <div class="like-container">
-              <button name="like2" value="{{ videos[1].key.urlsafe() }}">Like</button>
+              <button id="like2" name="like2" value="{{ videos[1].key.urlsafe() }}">Like</button>
               <span class="likes">{{ videos[1].like_count }}</span> likes
             </div>
           </div>
@@ -61,7 +64,7 @@
     </body>
         </form>
 
-
+<button id="test">Button</button>
 
     </div>
   </article>
@@ -81,6 +84,19 @@
       <h1 class="panel__headline"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Join Next</h1>
       <div class="panel__block"></div>
       <p>Here a user will use their url to queue next to be next.</p>
+
+      <table style="width:100%">
+        <tr>
+          <th>Place in line</th>
+          <th>Username</th>
+        </tr>
+        {% for video in videos %}
+
+          <tr>
+            <td>{{video.user_name}}</td>
+          </tr>
+        {% endfor %}
+      </table>
     </div>
   </article>
 </section>

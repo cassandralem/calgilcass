@@ -6,26 +6,77 @@ var tag = document.createElement('script');
 
    var player1;
    var player2;
+   var player1_url = ""
+   var player2_url = ""
 
-   function onYouTubeIframeAPIReady() {
-       player1 = new YT.Player('player1', {
-         height: '500',
-         width: '500',
-         videoId: 'gtoknSe54gs',
-         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
 
-       });
+   function get_and_delete(){
+    //  var player1El = $('#player1');
+    //  var videoUrl = player1El.attr('value');
+    //  console.log('VIDEO1 = ' + videoUrl);
+     $.post('/getdeletevideo', function(response_string) {
+       // TODO: Parse the JSON string into an object, that has the video's id and u
+       video_vars = JSON.parse(response_string)
+       console.log(video_vars)
+       $(player1).get();
+       player1_url = video_vars.videoId
+       player1_key = video_vars.videoUrlSafeKey
+       console.log(player1_url)
 
-       player2 = new YT.Player('player2', {
-         height: '500',
-         width: '500',
-         videoId: 'fcsDG_jVYbc',
-         playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
 
-       });
+
+
+     $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url)
+     // TODO: Use video key to set the value of the like count
+     $('#like1').attr("value", player1_key)
+
+       // TODO: Use jQuery to select the correct iframe
+       // TODO: Update the src attribute of the iframe with the video id, also set autoplay=1
+
+      // onYouTubeIframeAPIReady(player1_url)
+    });
+
    }
 
+   $('#test').click(get_and_delete);
 
+   //function onYouTubeIframeAPIReady(player1_url) {
+      // console.log(player1_url)
+      //  player1 = new YT.Player('player1', {
+      //    height: '500',
+      //    width: '500',
+      //    videoId: player1_url,
+      //    playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0 },
+      //
+      //  });
+
+  //      player2 = new YT.Player('player2', {
+  //        height: '500',
+  //        width: '500',
+  //        videoId: 'vQdG3ks8-qY',
+  //        playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
+   //
+  //      });
+  //  };
+
+
+//setInterval(function(onYouTubeIframeAPIReady){console.log("Hello")},10000);
+/*
+1 minute is up
+decide if player1 or player2 win
+
+loser = player2
+new_url = response.newVideo
+new YT.Player(loser, {
+  height: '500',
+  width: '500',
+  videoId: new_url,
+  playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb':1, 'modestbranding':0, 'rel':0  },
+
+});
+
+
+*/
 
 
 function clickLike() {
@@ -59,6 +110,15 @@ $("form").submit(function(e){
 $('.video-container button').click(clickLike);
 
 // menu section allows for section navigation
+
+///Starting to linking database with videokeys in players
+
+
+
+
+
+
+
 
 var menu = document.querySelector('.nav__list');
 var burger = document.querySelector('.burger');
