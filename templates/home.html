@@ -84,6 +84,22 @@
       <h1 class="panel__headline"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Join Next</h1>
       <div class="panel__block"></div>
       <p>Here a user will use their url to queue next to be next.</p>
+      {% for video in videos %}
+        <h3> {{video.user_name}} </h3>
+      {% endfor %}
+      <table style="width:100%">
+        <tr>
+          <th>Place in line</th>
+          <th>Username</th>
+        </tr>
+        {% for video in videos %}
+          {% n = n + 1 %}
+          <tr>
+            <td> n </td>
+            <td>{{video.user_name}}</td>
+          </tr>
+        {% endfor %}
+      </table>
     </div>
   </article>
 </section>
