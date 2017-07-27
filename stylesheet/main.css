@@ -38,6 +38,10 @@ button {
    margin: 5px;
   }
 
+div {
+  text-align: center;
+}
+
 button:hover {
   background-color: #FFFFFF;
   color: #FFC300;
@@ -49,12 +53,17 @@ button:hover {
 }
 
 #test {
-  margin-left: 260px;
+  margin-left: 10px;
   height: 45px;
   width: 100px;
   padding: 0px;
 }
 
+
+a {
+  text-decoration: none;
+  color: white;
+}
 
 
 
