@@ -14,14 +14,21 @@ var tag = document.createElement('script');
     //  var player1El = $('#player1');
     //  var videoUrl = player1El.attr('value');
     //  console.log('VIDEO1 = ' + videoUrl);
-     $.post('/getdeletevideo', function(response) {
-       $(player1).get(response);
-       player1_url = response
+     $.post('/getdeletevideo', function(response_string) {
+       // TODO: Parse the JSON string into an object, that has the video's id and u
+       video_vars = JSON.parse(response_string)
+       console.log(video_vars)
+       $(player1).get();
+       player1_url = video_vars.videoId
+       player1_key = video_vars.videoUrlSafeKey
+       console.log(player1_url)
 
-       
+
 
 
      $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url)
+     // TODO: Use video key to set the value of the like count
+     $('#like1').attr("value", player1_key)
 
        // TODO: Use jQuery to select the correct iframe
        // TODO: Update the src attribute of the iframe with the video id, also set autoplay=1

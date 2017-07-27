@@ -2,6 +2,7 @@ import logging
 import webapp2
 import os
 import jinja2
+import json
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -93,7 +94,12 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
         video = video_query.get()
         video.played = True
         video.put()
-        self.response.write(video.video_id)
+        response_vars = {
+            "videoId": video.video_id,
+            "videoUrlSafeKey": video.key.urlsafe()
+        }
+        # TODO: Write a JSON response with the JSONified dictionary of the id and URLSafeKey
+        self.response.write(json.dumps(response_vars))
 
 
         #if videos == None:
