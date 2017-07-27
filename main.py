@@ -30,8 +30,7 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("templates/home.html")
         video_query = UploadedVideo.query().order(UploadedVideo.post_time)
         videos = video_query.fetch()
-        n = 0
-        
+
 
         template_vars = {
         "videos": videos
