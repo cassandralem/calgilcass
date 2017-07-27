@@ -39,6 +39,11 @@ body {
  }
 
 
+#form {
+ display: flex;
+ margin-left: 620px;
+}
+
 button {
    font-family:'Lato', sans-serif;
    border-radius: 4px;
@@ -49,7 +54,7 @@ button {
    text-align: center;
    font-size: 28px;
    padding: 20px;
-   margin-top: 10px;
+   margin-top: 20px;
    height: 45px;
    width: 100px;
    padding: 0px;
@@ -59,7 +64,8 @@ button {
   }
 
 button #join {
-  color:black;
+  outline-color: white;
+  color: black;
 }
 
 div {
@@ -81,12 +87,6 @@ button:hover {
   height: 45px;
   width: 100px;
   padding: 0px;
-}
-
-
-a {
-  text-decoration: none;
-  color: white;
 }
 
 
@@ -378,4 +378,16 @@ hr {
 .logo img:hover {
   -webkit-transform: rotate(180deg) scale(1.1);
           transform: rotate(180deg) scale(1.1);
+}
+
+button.join {
+  background-color: white;
+  color: #FECB26;
+  text-decoration: none;
+  margin-left: 350px;
+}
+
+a{
+  text-decoration: none;
+  color:#FECB26;
 }
