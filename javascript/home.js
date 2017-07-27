@@ -26,7 +26,7 @@ var tag = document.createElement('script');
 
 
 
-     $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url)
+     $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player1_url + "?autoplay=1&showinfo=0&controls=0")
      // TODO: Use video key to set the value of the like count
      $('#like1').attr("value", player1_key)
 
@@ -35,6 +35,7 @@ var tag = document.createElement('script');
 
       // onYouTubeIframeAPIReady(player1_url)
     });
+
 
    }
 
