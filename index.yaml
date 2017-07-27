@@ -14,9 +14,9 @@ indexes:
   properties:
   - name: played
   - name: post_time
-    direction: desc
 
 - kind: UploadedVideo
   properties:
   - name: played
   - name: post_time
+    direction: desc

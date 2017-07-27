@@ -35,6 +35,7 @@ class MainHandler(webapp2.RequestHandler):
         video_query = UploadedVideo.query().order(UploadedVideo.post_time)
         videos = video_query.fetch()
 
+
         video_query = UploadedVideo.query().order(UploadedVideo.post_time).filter(UploadedVideo.played==False)
         unplayedVideos = video_query.fetch()
 
@@ -98,11 +99,23 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
     def post(self):
         video_query = UploadedVideo.query().filter(UploadedVideo.played==False).order(UploadedVideo.post_time)
         video = video_query.get()
+        video.played = True
+        video.put()
+
+
         current_query = CurrentVideos.query()
         playing_videos = current_query.get()
 
         if not playing_videos:
-            playing_videos = CurrentVideos()
+            # playing_videos = CurrentVideos()
+            cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
+            llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
+
+            cat.put()
+            llama.put()
+            playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
+            playing_videos.put()
+
 
         video_right_key = playing_videos.video_right_key
         video_left_key = playing_videos.video_left_key
@@ -110,14 +123,26 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
         right_video = video_right_key.get()
         left_video = video_left_key.get()
 #need to change likes
+        logging.info(right_video.like_count)
+        logging.info(left_video.like_count)
+
         if right_video.like_count > left_video.like_count:
             playing_videos.video_left_key = video.key
-        elif right_video.like_count < left_video.like_count:
+            left_video = video
+            # logging.info(left_video)
+            right_video.like_count = 0
+            right_video.put()
+            left_video.put()
+
+        elif right_video.like_count <= left_video.like_count:
             playing_videos.video_right_key = video.key
+            right_video = video
+            # logging.info(right_key)
+            left_video.like_count = 0
+            left_video.put()
+            right_video.put()
 
         playing_videos.put()
-
-
 
 
 
@@ -127,12 +152,12 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
         #
         # lastvid.like_count = 0
 
-        video.played = True
-        video.put()
         # lastvid.put()
         response_vars = {
-            "videoId": video.video_id,
-            "videoUrlSafeKey": video.key.urlsafe()
+            "videoIdRight": right_video.video_id,
+            "videoUrlSafeKeyRight": right_video.key.urlsafe(),
+            "videoIdLeft": left_video.video_id,
+            "videoUrlSafeKeyLeft": left_video.key.urlsafe()
         }
         # TODO: Write a JSON response with the JSONified dictionary of the id and URLSafeKey
         self.response.write(json.dumps(response_vars))
