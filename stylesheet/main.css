@@ -1,8 +1,10 @@
+
 body {
    background-color: #FFC300;
    font-family:'Lato', sans-serif;
    font-size: 20px;
    font-weight: 10;
+   position: relative;
  }
 
  table {
@@ -390,4 +392,10 @@ button.join {
 a{
   text-decoration: none;
   color:#FECB26;
+}
+
+}
+
+#place {
+  margin-left: 50%;
 }
