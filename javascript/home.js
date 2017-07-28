@@ -20,9 +20,6 @@ var tag = document.createElement('script');
       var like2 = $('#video-container2').find('.likes');
       like2 = parseInt(like2.text());
 
-
-
-
       // var like2 = $('#like2')
       //
       // if like1 > like2 {
@@ -39,16 +36,17 @@ var tag = document.createElement('script');
        player_url_left = video_vars.videoIdLeft
        player_key_left = video_vars.videoUrlSafeKeyLeft
 
+       $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url_left + "?autoplay=1&showinfo=0&controls=0")
+   // TODO: Use video key to set the value of the like count
+        $('#like1').attr("value", player_key_left)
+
+
+        $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url_right + "?autoplay=1&showinfo=0&controls=0")
+    // TODO: Use video key to set the value of the like count
+        $('#like2').attr("value", player_key_right)
 
      })
-         $('#player1_iframe').attr("src", "https://www.youtube.com/embed/" + player_url_left + "?autoplay=1&showinfo=0&controls=0")
-     // TODO: Use video key to set the value of the like count
-          $('#like1').attr("value", player_key_left)
 
-
-          $('#player2_iframe').attr("src", "https://www.youtube.com/embed/" + player_url_right + "?autoplay=1&showinfo=0&controls=0")
-      // TODO: Use video key to set the value of the like count
-           $('#like2').attr("value", player_key_right)
 
 
 
@@ -121,7 +119,7 @@ function clickLike() {
   $.post('/likes', {'video_key': urlsafeKey}, function(response) {
     // Update the number in the "like" element.
     $(likes).text(response);
-    
+
 
 
   });

@@ -1,0 +1,5 @@
+cron:
+- description: Video Switch
+  url: /getdeletevideo
+  target: beta
+  schedule: every 1 minutes

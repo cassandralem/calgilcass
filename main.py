@@ -17,8 +17,8 @@ class UploadedVideo(ndb.Model):
     played = ndb.BooleanProperty(default = False)
 
 class CurrentVideos(ndb.Model):
-    video_right_key = ndb.KeyProperty()
-    video_left_key = ndb.KeyProperty()
+    video_right_key = ndb.KeyProperty(kind=UploadedVideo)
+    video_left_key = ndb.KeyProperty(kind=UploadedVideo)
 
 def add_default_videos():
     cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
@@ -70,6 +70,18 @@ class NewVideoHandler(webapp2.RequestHandler):
 
         self.redirect('/newvideo')
 
+class InitializeDefaultsHandler(webapp2.RequestHandler):
+    def get(self):
+        cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
+        llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
+
+        cat.put()
+        llama.put()
+        playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
+        playing_videos.put()
+        print "final playing_videos:", playing_videos
+
+
 class LikeHandler(webapp2.RequestHandler):
     # Handles increasing the likes when you click the button.
     def post(self):
@@ -96,26 +108,18 @@ class LikeHandler(webapp2.RequestHandler):
         self.response.write(video.like_count)
 
 class GetAndDeleteVideoHandler(webapp2.RequestHandler):
+    def get(self):
+        print "HELLO"
     def post(self):
+        current_query = CurrentVideos.query()
+        playing_videos = current_query.get()
+
         video_query = UploadedVideo.query().filter(UploadedVideo.played==False).order(UploadedVideo.post_time)
         video = video_query.get()
         video.played = True
         video.put()
 
-
-        current_query = CurrentVideos.query()
-        playing_videos = current_query.get()
-
-        if not playing_videos:
-            # playing_videos = CurrentVideos()
-            cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
-            llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
-
-            cat.put()
-            llama.put()
-            playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
-            playing_videos.put()
-
+        print "Initial playing_videos:", playing_videos
 
         video_right_key = playing_videos.video_right_key
         video_left_key = playing_videos.video_left_key
@@ -127,30 +131,33 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
         logging.info(left_video.like_count)
 
         if right_video.like_count > left_video.like_count:
+            print "right_video.like_count > left_video.like_count"
             playing_videos.video_left_key = video.key
             left_video = video
             # logging.info(left_video)
             right_video.like_count = 0
             right_video.put()
             left_video.put()
-
         elif right_video.like_count <= left_video.like_count:
+            print "right_video.like_count <= left_video.like_count"
             playing_videos.video_right_key = video.key
             right_video = video
             # logging.info(right_key)
             left_video.like_count = 0
             left_video.put()
             right_video.put()
+        else:
+            print "THIS SHOULD NOT HAPPEN!"
 
         playing_videos.put()
+        print "Final playing_videos:", playing_videos
 
 
 
-
-        # video_query2 = UploadedVideo.query().filter(UploadedVideo.played==True).order(-UploadedVideo.post_time)
-        # lastvid = video_query2.get()
-        #
-        # lastvid.like_count = 0
+            # video_query2 = UploadedVideo.query().filter(UploadedVideo.played==True).order(-UploadedVideo.post_time)
+            # lastvid = video_query2.get()
+            #
+            # lastvid.like_count = 0
 
         # lastvid.put()
         response_vars = {
@@ -159,6 +166,9 @@ class GetAndDeleteVideoHandler(webapp2.RequestHandler):
             "videoIdLeft": left_video.video_id,
             "videoUrlSafeKeyLeft": left_video.key.urlsafe()
         }
+
+        print "response_vars", response_vars
+
         # TODO: Write a JSON response with the JSONified dictionary of the id and URLSafeKey
         self.response.write(json.dumps(response_vars))
 
@@ -182,5 +192,6 @@ app = webapp2.WSGIApplication([
     ('/newvideo', NewVideoHandler),
     ('/likes', LikeHandler),
     ('/getdeletevideo', GetAndDeleteVideoHandler),
+    ('/defaults', InitializeDefaultsHandler),
 
 ], debug=True)
