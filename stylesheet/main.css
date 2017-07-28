@@ -123,8 +123,8 @@ ul {
 
 
 hr {
-  border-top: 1px dashed #8c8b8b;
-
+  border-top: 4px dashed white;
+  border-bottom: none;
 }
 
 .nav {
