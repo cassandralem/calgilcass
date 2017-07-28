@@ -37,6 +37,7 @@ body {
    position: fixed;
    margin-left: 480px;
    margin-top: -35px;
+   z-index: 10;
 
  }
 
@@ -122,8 +123,8 @@ ul {
 
 
 hr {
-  border-top: 1px dashed #8c8b8b;
-
+  border-top: 4px dashed white;
+  border-bottom: none;
 }
 
 .nav {
@@ -337,7 +338,7 @@ hr {
 }
 
 .c-red {
-  color: #FF684A;
+  color: #FF6B4F;
 }
 
 .c-green {
@@ -353,7 +354,7 @@ hr {
 }
 
 .b-red {
-  background: #FF684A;
+  background: #FF6B4F;
 }
 
 .b-green {
