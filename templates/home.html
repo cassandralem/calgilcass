@@ -46,10 +46,10 @@
             <h3>Video 1</h3>
             <!-- <span id="player1" value="{{ videos[0].key.urlsafe() }}"></span> -->
             <!-- TODO: Instead of having spans, have iframes that start off without a src -->
-            <iframe id="player1_iframe" width="500" height="500" frameborder="0" allowfullscreen controls=0 autoplay ></iframe>
+            <iframe id="player1_iframe" src="https://www.youtube.com/embed/{{left_id}}?autoplay=1&showinfo=0&controls=0" width="500" height="500" frameborder="0" allowfullscreen controls=0 autoplay ></iframe>
 
             <div class="like-container">
-              <button id="like1" name="like1">Like</button>
+              <button id="like1" name="like1" value="{{left_urlsafe}}">Like</button>
               <span class="likes"> 0 </span> likes
             </div>
           </div>
@@ -59,9 +59,9 @@
             <br>
             <div id="video-container2" class="video-container">
             <h3>Video 2</h3>
-            <iframe id="player2_iframe" width="500" height="500" frameborder="0" allowfullscreen controls=0></iframe>
+            <iframe id="player2_iframe" src="https://www.youtube.com/embed/{{right_id}}?autoplay=1&showinfo=0&controls=0" width="500" height="500" frameborder="0" allowfullscreen controls=0></iframe>
             <div class="like-container">
-              <button id="like2" name="like2">Like</button>
+              <button id="like2" name="like2" value="{{right_urlsafe}}">Like</button>
               <span class="likes"> 0 </span> likes
             </div>
           </div>

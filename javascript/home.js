@@ -9,6 +9,18 @@ var tag = document.createElement('script');
    var player1_url = ""
    var player2_url = ""
 
+ function show_likes(){
+
+   var likes1 = $('#video-container1').find('.likes');
+   var likes2 = $('#video-container2').find('.likes');
+
+
+   $(likes1).text('0');
+   $(likes2).text('0');
+
+
+   }
+
 
    function get_and_delete(){
     //  var player1El = $('#player1');
@@ -47,11 +59,7 @@ var tag = document.createElement('script');
 
      })
 
-
-
-
-
-
+     show_likes();
        // TODO: Use jQuery to select the correct iframe
        // TODO: Update the src attribute of the iframe with the video id, also set autoplay=1
 
@@ -114,6 +122,7 @@ function clickLike() {
 
   // Get the URLsafe key from the button value.
   var urlsafeKey = $(button).val();
+  console.log(urlsafeKey)
 
   // Send a POST request and handle the response.
   $.post('/likes', {'video_key': urlsafeKey}, function(response) {

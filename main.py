@@ -20,28 +20,42 @@ class CurrentVideos(ndb.Model):
     video_right_key = ndb.KeyProperty(kind=UploadedVideo)
     video_left_key = ndb.KeyProperty(kind=UploadedVideo)
 
-def add_default_videos():
-    cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0)
-    llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0)
-
-    cat.put()
-    llama.put()
-
-    return [llama, cat]
-
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("templates/home.html")
         video_query = UploadedVideo.query().order(UploadedVideo.post_time)
         videos = video_query.fetch()
 
+        current_query = CurrentVideos.query()
+        playing_videos = current_query.get()
+
+        left_key = playing_videos.video_left_key
+        right_key = playing_videos.video_right_key
+
+        left_vid = left_key.get()
+        right_vid = right_key.get()
+
+        left_id = left_vid.video_id
+        right_id = right_vid.video_id
+
+        url_safe_right = right_vid.key.urlsafe()
+        url_safe_left = left_key.urlsafe()
+
+        logging.info(url_safe_right)
+        logging.info(url_safe_left)
 
         video_query = UploadedVideo.query().order(UploadedVideo.post_time).filter(UploadedVideo.played==False)
         unplayedVideos = video_query.fetch()
 
         template_vars = {
         "videos": videos,
-        "unplayedVideos": unplayedVideos
+        "unplayedVideos": unplayedVideos,
+        "left_id": left_id,
+        "right_id": right_id,
+        "left_key": left_key,
+        "right_key": right_key,
+        "left_urlsafe": url_safe_left,
+        "right_urlsafe": url_safe_right,
         }
 
         self.response.write(template.render(template_vars))
@@ -72,13 +86,69 @@ class NewVideoHandler(webapp2.RequestHandler):
 
 class InitializeDefaultsHandler(webapp2.RequestHandler):
     def get(self):
-        cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
-        llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
+        video_query = UploadedVideo.query().filter().order(UploadedVideo.post_time)
+        videos = video_query.fetch()
+        current_query = CurrentVideos.query()
+        playing_videos = current_query.get()
 
-        cat.put()
-        llama.put()
-        playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
+        for video in videos:
+            video.key.delete()
+
+        default1 = UploadedVideo(user_name='D1', video_id='3XwKepsOjKA', played=True)
+        default2 = UploadedVideo(user_name='D2', video_id='ZXsQAXx_ao0', played=True)
+        default3 = UploadedVideo(user_name='D3', video_id='_Y_3euC4kxA')
+        default4 = UploadedVideo(user_name='D4', video_id='oYmPJfMCsvc')
+        default5 = UploadedVideo(user_name='D5', video_id='3aQRO29ZzbE')
+        default6 = UploadedVideo(user_name='D6', video_id='dGinm6KIC4Q')
+        default7 = UploadedVideo(user_name='D7', video_id='zOVPlw_QC1o')
+        default8 = UploadedVideo(user_name='D8', video_id='zGcYabz3hYg')
+        default9 = UploadedVideo(user_name='D9', video_id='_-47JOTCXGQ')
+        default10 = UploadedVideo(user_name='D10', video_id='KzARx0EuDgc')
+        default11 = UploadedVideo(user_name='D11', video_id='wej-t_as93Q')
+        default12 = UploadedVideo(user_name='D12', video_id='3XyOgx9bCUo')
+        default13 = UploadedVideo(user_name='D13', video_id='lLWEXRAnQd0')
+        default14 = UploadedVideo(user_name='D14', video_id='0_jBz6eN-Ew')
+        default15 = UploadedVideo(user_name='D15', video_id='oN-KOoVuhuo')
+        default16 = UploadedVideo(user_name='D16', video_id='k9xronkrgng')
+
+        default1.put()
+        default2.put()
+        default3.put()
+        default4.put()
+        default5.put()
+        default6.put()
+        default7.put()
+        default8.put()
+        default9.put()
+        default10.put()
+        default11.put()
+        default12.put()
+        default13.put()
+        default14.put()
+        default15.put()
+        default16.put()
+
+        playing_videos.key.delete()
+        playing_videos = CurrentVideos(video_right_key=default1.key, video_left_key=default2.key)
         playing_videos.put()
+
+        # if not playing_videos:
+        #
+        #     cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
+        #     llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
+        #
+        #
+        #     cat.put()
+        #     llama.put()
+        #
+        #     playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
+        #     playing_videos.put()
+
+
+
+
+
+
         print "final playing_videos:", playing_videos
 
 
