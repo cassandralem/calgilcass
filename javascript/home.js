@@ -66,6 +66,7 @@ var tag = document.createElement('script');
       // onYouTubeIframeAPIReady(player1_url)
     };
 
+    setInterval(get_and_delete,60000);
    $('#test').click(get_and_delete);
 
    //function onYouTubeIframeAPIReady(player1_url) {

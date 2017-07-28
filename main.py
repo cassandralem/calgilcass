@@ -132,24 +132,8 @@ class InitializeDefaultsHandler(webapp2.RequestHandler):
         playing_videos = CurrentVideos(video_right_key=default1.key, video_left_key=default2.key)
         playing_videos.put()
 
-        # if not playing_videos:
-        #
-        #     cat = UploadedVideo(user_name='Cat', video_id='tntOCGkgt98', like_count=0, played=True)
-        #     llama = UploadedVideo(user_name='Llama', video_id='KG1U8-i1evU', like_count=0, played=True)
-        #
-        #
-        #     cat.put()
-        #     llama.put()
-        #
-        #     playing_videos = CurrentVideos(video_right_key=cat.key, video_left_key=llama.key)
-        #     playing_videos.put()
-
-
-
-
-
-
         print "final playing_videos:", playing_videos
+        self.redirect('/')
 
 
 class LikeHandler(webapp2.RequestHandler):
