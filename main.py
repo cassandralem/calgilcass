@@ -96,7 +96,7 @@ class InitializeDefaultsHandler(webapp2.RequestHandler):
 
         default1 = UploadedVideo(user_name='D1', video_id='3XwKepsOjKA', played=True)
         default2 = UploadedVideo(user_name='D2', video_id='ZXsQAXx_ao0', played=True)
-        default3 = UploadedVideo(user_name='D3', video_id='_Y_3euC4kxA')
+        default3 = UploadedVideo(user_name='D3', video_id='o0u4M6vppCI')
         default4 = UploadedVideo(user_name='D4', video_id='oYmPJfMCsvc')
         default5 = UploadedVideo(user_name='D5', video_id='3aQRO29ZzbE')
         default6 = UploadedVideo(user_name='D6', video_id='dGinm6KIC4Q')
